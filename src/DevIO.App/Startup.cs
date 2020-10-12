@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using DevIO.Data.Context;
 using DevIO.Data.Repositories;
 using DevIO.Business.Interfaces;
+using AutoMapper;
 
 namespace DevIO.App
 {
@@ -47,6 +48,7 @@ namespace DevIO.App
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
 
+            services.AddAutoMapper(typeof(Startup));
             services.AddRazorPages();
         }
 
