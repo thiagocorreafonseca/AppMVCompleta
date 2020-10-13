@@ -23,6 +23,7 @@ namespace DevIO.App.ViewModels
 
         public string Imagem { get; set; }
 
+        [Display(Name = "Imagem do Produto")]
         public IFormFile ImagemUpload { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é obrigatório")]
