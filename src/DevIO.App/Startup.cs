@@ -7,11 +7,15 @@ using Microsoft.Extensions.Hosting;
 using DevIO.Data.Context;
 using AutoMapper;
 using DevIO.App.Configurations;
+using DevIO.App.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace DevIO.App
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IHostEnvironment hostEnvironment)
         {
             var builder = new ConfigurationBuilder()
@@ -27,16 +31,15 @@ namespace DevIO.App
 
             Configuration = builder.Build();
         }
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentityConfiguration(Configuration);
+
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-
-            services.AddIdentityConfiguration(Configuration);
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             services.ResolveDependencies();
